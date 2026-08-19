@@ -37,5 +37,10 @@ button{
     height: 60px;
     font-size: 24px;
     border: 1px solid black;
+    cursor: pointer;
+    background: rgb(127, 127, 127);
+}
 
+button:hover{
+    background: rgb(108, 108, 108)
 }
