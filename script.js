@@ -25,6 +25,7 @@ let num2 = '';
 let currentInput = 'num1';
 let operator = '';
 let cntPressOperator = 0;
+let lastPressed = '';
 
 function operate(operator, num1, num2){
     switch (operator){
@@ -54,6 +55,7 @@ const clearBtn = document.querySelector('.clear')
 
 function updateDisplay(value){
     display.textContent = value || '0'
+    lastPressed = 'number';
 }
 
 numBtn.forEach(button => {
@@ -72,6 +74,9 @@ numBtn.forEach(button => {
 
 operatorBtn.forEach(button => {
     button.addEventListener('click', (event) => {
+        if(lastPressed === 'operator'){
+            alert("Don't press operator so often")
+        }
         const op = event.target.textContent;
         if (cntPressOperator===0){
             currentInput = 'num2';
@@ -89,6 +94,7 @@ operatorBtn.forEach(button => {
         }
         operator = op;
         cntPressOperator++;
+        lastPressed = 'operator';
     })
 })
 
@@ -109,6 +115,7 @@ equalsBtn.addEventListener('click', (e) =>{
     currentInput = 'num1';
     operator = '';
     cntPressOperator = 0;
+    lastPressed = 'equal';
 
 })
 
@@ -119,6 +126,7 @@ clearBtn.addEventListener('click', () => {
     operator = '';
     updateDisplay('0');
     cntPressOperator = 0;
+    lastPressed = 'clean';
 })
 
 
