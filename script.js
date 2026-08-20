@@ -11,13 +11,20 @@ function multiply(a, b){
 }
 
 function divide(a, b){
-    return a / b
+    if (b==0){
+        return alert("You can't divide on 0")
+    }
+    else{
+        return a / b
+    }
+    
 }
 
 let num1 = '';
 let num2 = '';
 let currentInput = 'num1';
 let operator = '';
+let cntPressOperator = 0;
 
 function operate(operator, num1, num2){
     switch (operator){
@@ -66,8 +73,22 @@ numBtn.forEach(button => {
 operatorBtn.forEach(button => {
     button.addEventListener('click', (event) => {
         const op = event.target.textContent;
-        currentInput = 'num2'
-        operator = op
+        if (cntPressOperator===0){
+            currentInput = 'num2';
+        }
+        else{
+            const a = Number(num1);
+            const b = Number(num2);
+            let result;
+            result = operate(operator, a, b);
+            display.textContent = result;
+
+            num1 = String(result);
+            num2 = '';
+            currentInput = 'num2';
+        }
+        operator = op;
+        cntPressOperator++;
     })
 })
 
@@ -86,7 +107,8 @@ equalsBtn.addEventListener('click', (e) =>{
     num1 = String(result);
     num2 = '';
     currentInput = 'num1';
-    operator = ''
+    operator = '';
+    cntPressOperator = 0;
 
 })
 
@@ -96,6 +118,7 @@ clearBtn.addEventListener('click', () => {
     currentInput = 'num1';
     operator = '';
     updateDisplay('0');
+    cntPressOperator = 0;
 })
 
 
