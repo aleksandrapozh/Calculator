@@ -15,7 +15,7 @@ function divide(a, b){
         return alert("You can't divide on 0")
     }
     else{
-        return a / b
+        return parseFloat((a / b).toFixed(2))
     }
     
 }
