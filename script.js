@@ -53,6 +53,7 @@ const operatorBtn = document.querySelectorAll('.operator')
 const equalsBtn = document.querySelector('.equals')
 const clearBtn = document.querySelector('.clear')
 const floatingPoint = document.querySelector('.decimal')
+const backspaceBtn = document.querySelector('.backspace')
 
 
 function updateDisplay(value){
@@ -155,4 +156,16 @@ floatingPoint.addEventListener('click', () => {
         }
         decimalAble = false;
     }
+})
+
+
+backspaceBtn.addEventListener('click',  (e) => {
+    if (currentInput === 'num1'){
+            num1 = num1.slice(0, -1);
+            updateDisplay(num1);
+        }
+        else{
+            num2 = num2.slice(0, -1);
+            updateDisplay(num2);
+        }
 })

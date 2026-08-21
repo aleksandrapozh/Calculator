@@ -44,3 +44,13 @@ button{
 button:hover{
     background: rgb(108, 108, 108)
 }
+
+button:last-child(){
+    flex: 0 0 calc(75% - 3px);
+}
+
+button:nth-last-child(2){
+    flex: 0 0 calc(25% - 7px);
+}
+
+
