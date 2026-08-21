@@ -82,6 +82,7 @@ operatorBtn.forEach(button => {
     button.addEventListener('click', (event) => {
         if(lastPress === 'operator'){
             alert("Don't press operator so often")
+            return null
         }
         const op = event.target.textContent;
         if (cntPressOperator===0){
@@ -141,6 +142,7 @@ clearBtn.addEventListener('click', () => {
 floatingPoint.addEventListener('click', () => {
     if (!decimalAble){
         alert('This number is already decimal') 
+        return
     }
     else if (decimalAble){
         if (currentInput === 'num1'){
@@ -161,11 +163,44 @@ floatingPoint.addEventListener('click', () => {
 
 backspaceBtn.addEventListener('click',  (e) => {
     if (currentInput === 'num1'){
-            num1 = num1.slice(0, -1);
-            updateDisplay(num1);
-        }
-        else{
-            num2 = num2.slice(0, -1);
-            updateDisplay(num2);
-        }
+        num1 = num1.slice(0, -1);
+        updateDisplay(num1);
+    }
+    else{
+        num2 = num2.slice(0, -1);
+        updateDisplay(num2);
+    }
+})
+
+const calculatorKeys = {
+    '+': 'btn-plus',
+    '-': 'btn-minus',
+    '/': 'btn-divide',
+    '*': 'btn-multiply',
+    '.': 'btn-dot',
+    ',': 'btn-dot',
+
+    '=': 'equals',
+    'Enter': 'equals',
+    'Backspace': 'backspace'
+}
+
+window.addEventListener('keydown', (event) => {
+    const buttonClass = calculatorKeys[event.key]
+
+    if (+event.key >= 0 && +event.key <= 9){
+        event.preventDefault();
+        const button = document.querySelector('.btn-'+event.key)
+        if(button){button.click()}
+        return;
+    }
+
+    if(buttonClass){
+        event.preventDefault();
+        const button = document.querySelector('.'+buttonClass);
+        if(button){button.click()}
+        return
+    }
+    
+
 })
