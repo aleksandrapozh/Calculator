@@ -26,6 +26,7 @@ let currentInput = 'num1';
 let operator = '';
 let cntPressOperator = 0;
 let lastPress = '';
+let decimalAble = true;
 
 function operate(operator, num1, num2){
     switch (operator){
@@ -51,6 +52,7 @@ const display = document.querySelector('.display')
 const operatorBtn = document.querySelectorAll('.operator')
 const equalsBtn = document.querySelector('.equals')
 const clearBtn = document.querySelector('.clear')
+const floatingPoint = document.querySelector('.decimal')
 
 
 function updateDisplay(value){
@@ -62,7 +64,7 @@ numBtn.forEach(button => {
     button.addEventListener('click', (event) => {
         const digit = event.target.textContent;
         if (currentInput === 'num1'){
-            if(lastPress='equal'){
+            if(lastPress === 'equal'){
                 num1 = ''
             }
             num1 += digit;
@@ -98,6 +100,7 @@ operatorBtn.forEach(button => {
         operator = op;
         cntPressOperator++;
         lastPress = 'operator';
+        decimalAble = true;
     })
 })
 
@@ -119,6 +122,7 @@ equalsBtn.addEventListener('click', (e) =>{
     operator = '';
     cntPressOperator = 0;
     lastPress = 'equal';
+    decimalAble = true;
 
 })
 
@@ -130,6 +134,25 @@ clearBtn.addEventListener('click', () => {
     updateDisplay('0');
     cntPressOperator = 0;
     lastPress = 'clean';
+    decimalAble = true;
 })
 
-
+floatingPoint.addEventListener('click', () => {
+    if (!decimalAble){
+        alert('This number is already decimal') 
+    }
+    else if (decimalAble){
+        if (currentInput === 'num1'){
+            if(lastPress==='equal'){
+                num1 = ''
+            }
+            num1 += '.';
+            updateDisplay(num1);
+        }
+        else{
+            num2 += '.';
+            updateDisplay(num2);
+        }
+        decimalAble = false;
+    }
+})
